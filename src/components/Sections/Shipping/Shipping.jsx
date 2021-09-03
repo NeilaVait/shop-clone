@@ -21,10 +21,29 @@ const ShippingArr = [
     },
     social: true,
   },
+  {
+    title: 'OUR STORES',
+    address: [
+      {
+        title: 'Melbourne Store:',
+        line1: '795 Folsom Ave, Suite 600',
+        line2: 'San Francisco, CA 94107',
+      },
+      {
+        title: 'Sydney Store:',
+        line1: '795 Folsom Ave, Suite 600',
+        line2: 'San Francisco, CA 94107',
+      },
+    ],
+    workingHours: {
+      from: '10am',
+      to: '7pm',
+      day: 'Every',
+    },
+  },
 ];
 
 const ShippingSection = styled.section`
-  margin: 0 5%;
   display: flex;
   gap: 2rem;
   // style
@@ -32,7 +51,7 @@ const ShippingSection = styled.section`
 
 export default function Shipping() {
   return (
-    <ShippingSection>
+    <ShippingSection className='container'>
       {ShippingArr.map((col) => (
         <ShippingCol key={col.title} column={col} />
       ))}
