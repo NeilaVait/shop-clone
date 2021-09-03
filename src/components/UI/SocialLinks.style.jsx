@@ -1,9 +1,16 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Icon from './Icon';
 
 const SocialContainer = styled.div`
   display: flex;
   align-items: center;
+  ${(props) =>
+    props.hero &&
+    css`
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1rem;
+    `}
 
   .dash {
     width: 2rem;
@@ -26,9 +33,9 @@ const social = [
   { title: 'Youtube', icon: 'youtube-play', link: 'http://www.youtube.com' },
 ];
 
-export default function SocialLinks({ dash }) {
+export default function SocialLinks({ dash, hero }) {
   return (
-    <SocialContainer>
+    <SocialContainer hero={hero}>
       {dash && <div className='dash'></div>}
       {social.map((s) => (
         <a key={s.link} target='_blank' rel='noreferrer' href={s.link}>

@@ -58,8 +58,8 @@ function App() {
   return (
     <Layout>
       {/* <button onClick={btnHandler}>Get ref</button> */}
-      {/* <Hero />
-      <Collections />
+      <Hero />
+      {/* <Collections />
       <Shop asideStick={asideStick} ref={asideRef} />
       <Blog ref={blogRef} />
       <Cta /> */}

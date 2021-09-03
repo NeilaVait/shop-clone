@@ -1,6 +1,7 @@
 import css from './Hero.module.css';
 import Button from '../UI/Button';
 import Icon from '../UI/Icon';
+import SocialLinks from '../UI/SocialLinks.style';
 
 const social = [
   {
@@ -26,15 +27,7 @@ export default function Hero() {
           <Button>Shop Woman</Button>
         </div>
       </div>
-      {/* socialLinks komponentas, pernaudojam Shippinge  */}
-      <div className={css.social}>
-        <div className={css.dash}></div>
-        {social.map((s) => (
-          <a key={s.link} target='_blank' rel='noreferrer' href={s.link}>
-            <Icon icon={s.icon} />
-          </a>
-        ))}
-      </div>
+      <SocialLinks dash hero />
     </section>
   );
 }
