@@ -26,6 +26,7 @@ export default function Hero() {
           <Button>Shop Woman</Button>
         </div>
       </div>
+      {/* socialLinks komponentas, pernaudojam Shippinge  */}
       <div className={css.social}>
         <div className={css.dash}></div>
         {social.map((s) => (
