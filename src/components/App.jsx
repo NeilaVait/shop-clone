@@ -7,6 +7,7 @@ import Blog from './Sections/Blog/Blog';
 import Cta from './Sections/CTA/Cta';
 import Layout from './Layout/Layout';
 import { useRef, useEffect, useState } from 'react';
+import Shipping from './Sections/Shipping/Shipping';
 
 function App() {
   const blogRef = useRef();
@@ -14,12 +15,12 @@ function App() {
 
   const [asideStick, setAsideStick] = useState(false);
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
 
   function handleScroll() {
     const asideTopDistance = asideRef.current.getBoundingClientRect().top;
@@ -56,12 +57,13 @@ function App() {
 
   return (
     <Layout>
-      <button onClick={btnHandler}>Get ref</button>
-      <Hero />
+      {/* <button onClick={btnHandler}>Get ref</button> */}
+      {/* <Hero />
       <Collections />
       <Shop asideStick={asideStick} ref={asideRef} />
       <Blog ref={blogRef} />
-      <Cta />
+      <Cta /> */}
+      <Shipping />
     </Layout>
   );
 }
