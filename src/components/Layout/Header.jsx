@@ -1,36 +1,11 @@
 import css from './Header.module.css';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import useStrapi from '../../hooks/useStrapi';
 
 export default function Header() {
   // sekti ar dokumentas yra slenkamas zemyn
   const [navState, setNavState] = useState(false);
-
-  const [menuItems, setMenuItems] = useState([]);
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  // turim tureti state kad issaugoti meniu
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      setError('');
-      try {
-        const { data } = await axios.get(
-          `${process.env.REACT_APP_STRAPI_URL}/canvas-menus`
-        );
-        console.log(data);
-        setMenuItems(data);
-      } catch (error) {
-        setError('Something went wrong');
-        console.log(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, []);
-  // parsisiusti meniu
-
-  // panaudoti meniu vietoj Links
+  const [menuItems] = useStrapi('/canvas-menus');
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
