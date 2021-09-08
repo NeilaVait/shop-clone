@@ -18,6 +18,9 @@
   font-size: 3rem;
   margin-bottom: 1rem;
 }
+.center-part p {
+  margin-bottom: 1rem;
+}
 
 .controll button:first-of-type {
   margin-right: 0.5rem;
