@@ -1,6 +1,7 @@
 import css from './Collections.module.css';
 import CollecionItem from './CollecionItem';
-const collectionsData = [
+import useStrapi from '../../../hooks/useStrapi';
+const collectionsDataWas = [
   {
     id: 1,
     discount: 50,
@@ -27,10 +28,19 @@ const collectionsData = [
   },
 ];
 
+// sukurti canvas-special-offer colecija strapi
+// joje sukelti visas reiksmes kurios yra collectionsData el (3elementus)
+// suteikti public permisions (leidimus pasiimti duomenis)
+// panauoti useStrapi ir gauti duomenis
+
 export default function Collections() {
+  const [collectionsData] = useStrapi('/canvas-special-offers');
+  console.log(
+    process.env.REACT_APP_STRAPI_URL +
+      collectionsData[0]?.image?.formats?.medium?.url
+  );
   return (
     <section className='container'>
-      <h2>TItle</h2>
       <div className={css['card-container']}>
         {collectionsData.map((it) => (
           <CollecionItem key={it.id} item={it} />
