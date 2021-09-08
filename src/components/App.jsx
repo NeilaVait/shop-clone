@@ -59,10 +59,10 @@ function App() {
     <Layout>
       {/* <button onClick={btnHandler}>Get ref</button> */}
       <Hero />
-      {/* <Collections />
+      <Collections />
       <Shop asideStick={asideStick} ref={asideRef} />
       <Blog ref={blogRef} />
-      <Cta /> */}
+      <Cta />
       <Shipping />
     </Layout>
   );
