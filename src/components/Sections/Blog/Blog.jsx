@@ -1,8 +1,13 @@
 import React from 'react';
 import css from './Blog.module.css';
 import BlogItem from './BlogItem';
+import useStrapi from '../../../hooks/useStrapi';
+// susikuriam canvas_blog collekcija
+// supildom 4 blogus
+// pasisisunciam ir naudojam tik 2
+// query params _limit=5 _sort=title
 
-const blogs = [
+const blogsWas = [
   {
     id: 'b1',
     title: 'Want to travel? Great Stuffs for Travel',
@@ -24,13 +29,17 @@ const blogs = [
   },
 ];
 // forwardingRef - naudojama kai reikia perduoti DOM nuoroda SUkurtam komponetui
-const Blog = React.forwardRef((props, blogRef) => (
-  <section ref={blogRef} className={`container ${css.blog}`}>
-    {blogs.map((b) => (
-      <BlogItem key={b.id} blog={b} />
-    ))}
-  </section>
-));
+const Blog = React.forwardRef((props, blogRef) => {
+  const [blogs] = useStrapi('/canvas-blogs?_limit=2');
+  // const firstTwo = blogs.slice(0, 2);
+  return (
+    <section ref={blogRef} className={`container ${css.blog}`}>
+      {blogs.map((b) => (
+        <BlogItem key={b.id} blog={b} />
+      ))}
+    </section>
+  );
+});
 
 export default Blog;
 // sukiam sekcija Blog

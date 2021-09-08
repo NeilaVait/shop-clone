@@ -4,7 +4,7 @@ import Icon from '../../UI/Icon';
 export default function BlogItem({ blog: b }) {
   return (
     <article className={css['blog-item']}>
-      <img src={b.image} alt={b.title} />
+      <img src={process.env.REACT_APP_STRAPI_URL + b.image.url} alt={b.title} />
       <h3 className='title'>{b.title}</h3>
       {/* TODO: panaudoti summary, jei nera tada nukirpri pagr text */}
       <p>{b.summary}</p>
