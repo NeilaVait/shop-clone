@@ -21,10 +21,3 @@ const Blog = React.forwardRef((props, blogRef) => {
 });
 
 export default Blog;
-// sukiam sekcija Blog
-
-// Sukuriam BlogItem pagal dizaina
-
-// atvizduojam viska kaip brezinyje
-
-// duomenys blog is sukurto masyvo

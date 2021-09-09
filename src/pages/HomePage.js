@@ -24,9 +24,9 @@ export default function HomePage() {
     const asideTopDistance = asideRef.current.getBoundingClientRect().top;
     const asideBottomDistance = asideRef.current.getBoundingClientRect().bottom;
     const blogTopDistance = blogRef.current.getBoundingClientRect().top;
-    console.log({ asideTopDistance });
-    console.log({ asideBottomDistance });
-    console.log({ blogTopDistance });
+    // console.log({ asideTopDistance });
+    // console.log({ asideBottomDistance });
+    // console.log({ blogTopDistance });
 
     // normali busena
     // aside sicky

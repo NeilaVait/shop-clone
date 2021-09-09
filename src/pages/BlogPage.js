@@ -12,6 +12,7 @@ export default function BlogPage() {
         </Route>
         <Route path='/blog'>
           <Blog />
+          <Blog />
         </Route>
       </Switch>
     </Layout>

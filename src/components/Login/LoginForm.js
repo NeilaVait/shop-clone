@@ -67,7 +67,7 @@ export default function LoginForm() {
     }
     console.log(email, password);
     const response = await postData({ email, password }, '/auth/local');
-    console.log(response);
+    // console.log(response);
   }
   return (
     <Card>

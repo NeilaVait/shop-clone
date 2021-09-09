@@ -4,7 +4,7 @@ import { Link, useRouteMatch } from 'react-router-dom';
 
 export default function BlogItem({ blog: b, singlePage }) {
   const match = useRouteMatch();
-  console.log(match);
+  // console.log(match);
   return (
     <article
       className={`${css['blog-item']} ${singlePage ? css.singlePage : ''}`}
