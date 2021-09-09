@@ -1,3 +1,4 @@
+import { useRef, useEffect, useState } from 'react';
 import '../style/App.css';
 import 'font-awesome/css/font-awesome.css';
 import Hero from './Sections/Hero';
@@ -6,9 +7,8 @@ import Shop from './Sections/Shop/Shop';
 import Blog from './Sections/Blog/Blog';
 import Cta from './Sections/CTA/Cta';
 import Layout from './Layout/Layout';
-import { useRef, useEffect, useState } from 'react';
 import Shipping from './Sections/Shipping/Shipping';
-
+import { Switch, Route } from 'react-router-dom';
 function App() {
   const blogRef = useRef();
   const asideRef = useRef();
@@ -58,12 +58,19 @@ function App() {
   return (
     <Layout>
       {/* <button onClick={btnHandler}>Get ref</button> */}
-      <Hero />
-      <Collections />
-      <Shop asideStick={asideStick} ref={asideRef} />
-      <Blog ref={blogRef} />
-      <Cta />
-      <Shipping />
+      <Switch>
+        <Route path='/blog'>
+          <Blog />
+        </Route>
+        <Route path='/'>
+          <Hero />
+          <Collections />
+          <Shop asideStick={asideStick} ref={asideRef} />
+          <Blog ref={blogRef} />
+          <Cta />
+          <Shipping />
+        </Route>
+      </Switch>
     </Layout>
   );
 }
