@@ -5,6 +5,7 @@ import Layout from './Layout/Layout';
 import HomePage from '../pages/HomePage';
 import BlogPage from '../pages/BlogPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import LoginPage from '../pages/LoginPage';
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
       <Switch>
         <Route path='/blog'>
           <BlogPage />
+        </Route>
+        <Route path='/login'>
+          <LoginPage />
         </Route>
         <Route path='/'>
           <HomePage />

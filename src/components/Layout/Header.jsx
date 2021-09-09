@@ -46,7 +46,7 @@ export default function Header({ page }) {
         ))}
       </nav>
       <nav className={css['side-nav']}>
-        <a href='/'>SignUp/Login</a>
+        <Link to='/login'>SignUp/Login</Link>
         <a href='/'>Cart</a>
       </nav>
     </header>

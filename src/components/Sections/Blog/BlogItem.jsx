@@ -16,7 +16,7 @@ export default function BlogItem({ blog: b, singlePage }) {
       />
       {!singlePage && <h3 className='title'>{b.title}</h3>}
       {/* TODO: panaudoti summary, jei nera tada nukirpri pagr text */}
-      <p>{b.summary}</p>
+      <p>{singlePage ? b.text : b.summary}</p>
       {b.address && (
         <address>
           <strong>
@@ -29,9 +29,12 @@ export default function BlogItem({ blog: b, singlePage }) {
         </address>
       )}
       {/* match.url - grazina dabartini url adresa */}
-      <Link to={`${match.url}/${b.id}`}>
-        View details <Icon icon='long-arrow-right' />
-      </Link>
+      {!singlePage && (
+        <Link to={`${match.url}/${b.id}`}>
+          View details <Icon icon='long-arrow-right' />
+        </Link>
+      )}
+      {singlePage && <Link to='/blog'>Go back</Link>}
     </article>
   );
 }
