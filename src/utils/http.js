@@ -1,10 +1,15 @@
 import axios from 'axios';
 
-export const postData = async (url, data) => {
+export const postData = async (dataToSend, urlEnd) => {
   try {
-    const response = await axios.post(url + apiKey, data);
-    console.log(response.data);
-    return true;
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_STRAPI_URL}${urlEnd}`,
+      {
+        identifier: dataToSend.email,
+        password: dataToSend.password,
+      }
+    );
+    return data;
   } catch (error) {
     console.warn(error);
   }

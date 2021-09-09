@@ -1,6 +1,6 @@
 import { useState } from 'react';
-export default function useInput() {
-  const [inputVal, setInputVal] = useState('');
+export default function useInput(initValue) {
+  const [inputVal, setInputVal] = useState(initValue);
 
   function changeHandler(e) {
     // console.log('e', e);

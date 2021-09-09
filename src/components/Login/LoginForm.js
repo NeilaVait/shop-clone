@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import useInput from '../../hooks/useInput';
-import useStrapiPost from '../../hooks/useStrapiPost';
+import { postData } from '../../utils/http';
 
 const Card = styled.div`
   max-width: 400px;
@@ -55,18 +55,18 @@ const Hr = styled.div`
 `;
 
 export default function LoginForm() {
-  const [email, setEmail] = useInput();
-  const [password, setPassword] = useInput();
+  const [email, setEmail] = useInput('paid@member.com');
+  const [password, setPassword] = useInput('123456');
 
   const [formError, setFormError] = useState('');
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (!email || !password) {
       return setFormError('Fill in fields');
     }
     console.log(email, password);
-
+    const response = await postData({ email, password }, '/auth/local');
     console.log(response);
   }
   return (
