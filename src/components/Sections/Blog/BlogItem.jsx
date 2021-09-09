@@ -1,7 +1,10 @@
 import css from './BlogItem.module.css';
 import Icon from '../../UI/Icon';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 export default function BlogItem({ blog: b }) {
+  const match = useRouteMatch();
+  console.log(match);
   return (
     <article className={css['blog-item']}>
       <img src={process.env.REACT_APP_STRAPI_URL + b.image.url} alt={b.title} />
@@ -19,9 +22,10 @@ export default function BlogItem({ blog: b }) {
           </a>
         </address>
       )}
-      <a href={b.link}>
+      {/* match.url - grazina dabartini url adresa */}
+      <Link to={`${match.url}/${b.id}`}>
         View details <Icon icon='long-arrow-right' />
-      </a>
+      </Link>
     </article>
   );
 }
