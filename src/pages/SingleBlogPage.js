@@ -14,7 +14,7 @@ export default function SingleBlogPage() {
   return (
     <section className='container'>
       <h1>single</h1>
-      <BlogItem blog={blogObj} />
+      <BlogItem singlePage blog={blogObj} />
     </section>
   );
 }
