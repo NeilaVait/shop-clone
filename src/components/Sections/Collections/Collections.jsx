@@ -35,10 +35,10 @@ const collectionsDataWas = [
 
 export default function Collections() {
   const [collectionsData] = useStrapi('/canvas-special-offers');
-  console.log(
-    process.env.REACT_APP_STRAPI_URL +
-      collectionsData[0]?.image?.formats?.medium?.url
-  );
+  // console.log(
+  //   process.env.REACT_APP_STRAPI_URL +
+  //     collectionsData[0]?.image?.formats?.medium?.url
+  // );
   return (
     <section className='container'>
       <div className={css['card-container']}>

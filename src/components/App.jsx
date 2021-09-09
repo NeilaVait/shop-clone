@@ -66,7 +66,7 @@ function App() {
           <Hero />
           <Collections />
           <Shop asideStick={asideStick} ref={asideRef} />
-          <Blog ref={blogRef} />
+          <Blog ref={blogRef} qty='2' />
           <Cta />
           <Shipping />
         </Route>

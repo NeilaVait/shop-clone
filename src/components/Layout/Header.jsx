@@ -1,11 +1,16 @@
 import css from './Header.module.css';
 import { useState, useEffect } from 'react';
 import useStrapi from '../../hooks/useStrapi';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 export default function Header() {
   // sekti ar dokumentas yra slenkamas zemyn
   const [navState, setNavState] = useState(false);
   const [menuItems] = useStrapi('/canvas-menus');
+  const match = useRouteMatch();
+  useEffect(() => {
+    console.log('match', match);
+  }, [match]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -26,14 +31,14 @@ export default function Header() {
   // if (isLoading) return <header>Loading ...</header>;
   return (
     <header className={`${css.header} ${navState ? css.active : ''}`}>
-      <a className={css.logo} href='/'>
+      <Link className={css.logo} to='/'>
         Canvas<strong>Store</strong>
-      </a>
+      </Link>
       <nav className={css['main-nav']}>
         {menuItems.map((l) => (
-          <a key={l.link} href={l.link}>
+          <Link key={l.link} to={l.link}>
             {l.title}
-          </a>
+          </Link>
         ))}
       </nav>
       <nav className={css['side-nav']}>
