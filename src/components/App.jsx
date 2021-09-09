@@ -6,22 +6,25 @@ import HomePage from '../pages/HomePage';
 import BlogPage from '../pages/BlogPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import LoginPage from '../pages/LoginPage';
+import AuthProvider from '../store/AuthProvider';
 
 function App() {
   return (
     <Router>
-      {/* <button onClick={btnHandler}>Get ref</button> */}
-      <Switch>
-        <Route path='/blog'>
-          <BlogPage />
-        </Route>
-        <Route path='/login'>
-          <LoginPage />
-        </Route>
-        <Route path='/'>
-          <HomePage />
-        </Route>
-      </Switch>
+      <AuthProvider>
+        {/* <button onClick={btnHandler}>Get ref</button> */}
+        <Switch>
+          <Route path='/blog'>
+            <BlogPage />
+          </Route>
+          <Route path='/login'>
+            <LoginPage />
+          </Route>
+          <Route path='/'>
+            <HomePage />
+          </Route>
+        </Switch>
+      </AuthProvider>
     </Router>
   );
 }
