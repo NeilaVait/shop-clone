@@ -3,6 +3,7 @@ import css from './Blog.module.css';
 import BlogItem from './BlogItem';
 import useStrapi from '../../../hooks/useStrapi';
 import { useRouteMatch } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
 
 // susikuriam canvas_blog collekcija
 // supildom 4 blogus
@@ -39,9 +40,16 @@ const Blog = React.forwardRef((props, blogRef) => {
   // const firstTwo = blogs.slice(0, 2);
   return (
     <section ref={blogRef} className={`container ${css.blog}`}>
-      {blogs.map((b) => (
-        <BlogItem key={b.id} blog={b} />
-      ))}
+      <Switch>
+        <Route path='/blog/:blogId'>
+          <h2>Single blog page</h2>
+        </Route>
+        <Route path='/blog'>
+          {blogs.map((b) => (
+            <BlogItem key={b.id} blog={b} />
+          ))}
+        </Route>
+      </Switch>
     </section>
   );
 });
