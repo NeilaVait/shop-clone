@@ -8,9 +8,9 @@ export default function Header({ page }) {
   const [navState, setNavState] = useState(false);
   const [menuItems] = useStrapi('/canvas-menus');
   const match = useRouteMatch();
-  useEffect(() => {
-    console.log('match', match);
-  }, [match]);
+  // useEffect(() => {
+  //   console.log('match', match);
+  // }, [match]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
