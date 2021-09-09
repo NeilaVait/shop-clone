@@ -5,6 +5,7 @@ import Blog from '../components/Sections/Blog/Blog';
 import Cta from '../components/Sections/CTA/Cta';
 import Shipping from '../components/Sections/Shipping/Shipping';
 import { useRef, useEffect, useState } from 'react';
+import Layout from '../components/Layout/Layout';
 
 export default function HomePage() {
   const blogRef = useRef();
@@ -52,13 +53,13 @@ export default function HomePage() {
     console.log('aside', asideRef.current.getBoundingClientRect().top);
   }
   return (
-    <div>
+    <Layout>
       <Hero />
       <Collections />
       <Shop asideStick={asideStick} ref={asideRef} />
       <Blog ref={blogRef} qty='2' />
       <Cta />
       <Shipping />
-    </div>
+    </Layout>
   );
 }

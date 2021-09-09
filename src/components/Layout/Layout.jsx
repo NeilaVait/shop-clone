@@ -1,13 +1,12 @@
 import Header from './Header';
 import css from './Layout.module.css';
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
-export default function Layout({ children }) {
+export default function Layout({ children, page }) {
   return (
-    <Router>
-      <Header />
+    <>
+      <Header page={page} />
+      {/* {page === 'blog' && <aside>Info about blogs</aside>} */}
       {children}
-    </Router>
+    </>
   );
 }

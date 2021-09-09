@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import useStrapi from '../../hooks/useStrapi';
 import { Link, useRouteMatch } from 'react-router-dom';
 
-export default function Header() {
+export default function Header({ page }) {
   // sekti ar dokumentas yra slenkamas zemyn
   const [navState, setNavState] = useState(false);
   const [menuItems] = useStrapi('/canvas-menus');
@@ -30,7 +30,11 @@ export default function Header() {
   }
   // if (isLoading) return <header>Loading ...</header>;
   return (
-    <header className={`${css.header} ${navState ? css.active : ''}`}>
+    <header
+      className={`${css.header} ${
+        navState || page === 'blog' ? css.active : ''
+      } `}
+    >
       <Link className={css.logo} to='/'>
         Canvas<strong>Store</strong>
       </Link>

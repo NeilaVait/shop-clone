@@ -1,13 +1,14 @@
 import '../style/App.css';
 import 'font-awesome/css/font-awesome.css';
 import Layout from './Layout/Layout';
-import { Switch, Route } from 'react-router-dom';
+
 import HomePage from '../pages/HomePage';
 import BlogPage from '../pages/BlogPage';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <Layout>
+    <Router>
       {/* <button onClick={btnHandler}>Get ref</button> */}
       <Switch>
         <Route path='/blog'>
@@ -17,7 +18,7 @@ function App() {
           <HomePage />
         </Route>
       </Switch>
-    </Layout>
+    </Router>
   );
 }
 
