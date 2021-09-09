@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import useInput from '../../hooks/useInput';
+import useStrapiPost from '../../hooks/useStrapiPost';
 
 const Card = styled.div`
   max-width: 400px;
@@ -65,6 +66,8 @@ export default function LoginForm() {
       return setFormError('Fill in fields');
     }
     console.log(email, password);
+
+    console.log(response);
   }
   return (
     <Card>
