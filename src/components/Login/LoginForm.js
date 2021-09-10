@@ -1,6 +1,5 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 import useInput from '../../hooks/useInput';
 import { postData } from '../../utils/http';
 import { AuthContext } from '../../store/AuthProvider';
@@ -71,10 +70,7 @@ export default function LoginForm() {
       return setFormError('Fill in fields');
     }
     // console.log(email, password);
-    const postToStrapiAuthReslut = await postData(
-      { email, password },
-      '/auth/local'
-    );
+    const postToStrapiAuthReslut = await postData({ email, password }, '/auth/local');
     // console.log(postToStrapiAuthReslut);
     // irasyti token i context
     const userData = {
@@ -83,28 +79,27 @@ export default function LoginForm() {
     };
     authCtx.login(postToStrapiAuthReslut.jwt, userData);
     // redirect
-    history.replace('/blog');
+    await history.replace('/blog');
   }
+
+  useEffect(() => {
+    // componentWillUnmount
+    return () => {
+      console.log('clean up');
+      setFormError(null);
+    };
+  }, []);
+
   return (
     <Card>
       <h2>Hello, welcome back</h2>
       <Hr />
       <form onSubmit={handleSubmit}>
-        <input
-          value={email}
-          onChange={setEmail}
-          type='text'
-          placeholder='Username or email'
-        />
-        <input
-          value={password}
-          onChange={setPassword}
-          type='password'
-          placeholder='Password'
-        />
-        <a href='/'>Forgot Password</a>
+        <input value={email} onChange={setEmail} type="text" placeholder="Username or email" />
+        <input value={password} onChange={setPassword} type="password" placeholder="Password" />
+        <a href="/">Forgot Password</a>
 
-        <button type='submit'>Login</button>
+        <button type="submit">Login</button>
       </form>
       <Hr />
       <h6>Don't have an account? Sign up</h6>
