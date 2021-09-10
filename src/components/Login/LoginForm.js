@@ -69,9 +69,13 @@ export default function LoginForm() {
       return setFormError('Fill in fields');
     }
     console.log(email, password);
-    const response = await postData({ email, password }, '/auth/local');
-    console.log(response);
+    const postToStrapiAuthReslut = await postData(
+      { email, password },
+      '/auth/local'
+    );
+    console.log(postToStrapiAuthReslut);
     // irasyti token i context
+    authCtx.login(postToStrapiAuthReslut.jwt);
   }
   return (
     <Card>
