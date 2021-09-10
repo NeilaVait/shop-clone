@@ -28,7 +28,8 @@ export default function AuthProvider({ children }) {
     setUserInfo(userData);
     console.log('loginHandler() has set the token');
   }
-  function logoutHandler(token) {
+  function logoutHandler() {
+    console.log('logoutHandler() ivyko');
     setToken('');
     setUserInfo({});
   }
@@ -38,7 +39,7 @@ export default function AuthProvider({ children }) {
     isLoggedIn: isLoggedIn,
     userInfo,
     login: loginHandler,
-    logout: () => {},
+    logout: logoutHandler,
   };
   return <AuthContext.Provider value={ctx}>{children}</AuthContext.Provider>;
 }

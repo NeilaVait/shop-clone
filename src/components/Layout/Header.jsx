@@ -12,7 +12,7 @@ export default function Header({ page }) {
   // sekti ar dokumentas yra slenkamas zemyn
   const [navState, setNavState] = useState(false);
   const [menuItems] = useStrapi('/canvas-menus');
-  const match = useRouteMatch();
+  // const match = useRouteMatch();
   // useEffect(() => {
   //   console.log('match', match);
   // }, [match]);
@@ -35,6 +35,11 @@ export default function Header({ page }) {
   }
   // if (isLoading) return <header>Loading ...</header>;
   // header dalyje kai prisiloginam mes parodom user email navigacijoj
+  function logoutHandler(e) {
+    e.preventDefault();
+    console.log('prevented');
+    authCtx.logout();
+  }
   return (
     <header
       className={`${css.header} ${
@@ -53,7 +58,9 @@ export default function Header({ page }) {
       </nav>
       <nav className={css['side-nav']}>
         {userEmail ? (
-          <Link to='/login'>Logout {userEmail}</Link>
+          <a onClick={logoutHandler} href='/logout'>
+            Logout {userEmail}
+          </a>
         ) : (
           <Link to='/login'>SignUp/Login</Link>
         )}

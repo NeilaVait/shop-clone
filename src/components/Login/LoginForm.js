@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import useInput from '../../hooks/useInput';
 import { postData } from '../../utils/http';
 import { AuthContext } from '../../store/AuthProvider';
+import { useHistory } from 'react-router-dom';
 
 const Card = styled.div`
   max-width: 400px;
@@ -56,6 +57,7 @@ const Hr = styled.div`
 `;
 
 export default function LoginForm() {
+  const history = useHistory();
   const authCtx = useContext(AuthContext);
   console.log('authCtx', authCtx);
   const [email, setEmail] = useInput('paid@member.com');
@@ -80,6 +82,8 @@ export default function LoginForm() {
       username: postToStrapiAuthReslut.user.username,
     };
     authCtx.login(postToStrapiAuthReslut.jwt, userData);
+    // redirect
+    history.replace('/blog');
   }
   return (
     <Card>
