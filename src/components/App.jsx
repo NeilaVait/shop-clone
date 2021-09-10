@@ -7,6 +7,7 @@ import BlogPage from '../pages/BlogPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import LoginPage from '../pages/LoginPage';
 import AuthProvider from '../store/AuthProvider';
+import MembersOnlyPage from '../pages/MembersOnlyPage';
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
       <AuthProvider>
         {/* <button onClick={btnHandler}>Get ref</button> */}
         <Switch>
+          <Route path='/membersonlypage'>
+            <MembersOnlyPage />
+          </Route>
           <Route path='/blog'>
             <BlogPage />
           </Route>
