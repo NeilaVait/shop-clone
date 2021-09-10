@@ -1,10 +1,18 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function useStrapi(urlEnd) {
+export default function useStrapi(urlEnd, token = null) {
   const [data, setData] = useState([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const headersObj = token
+    ? {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    : null;
 
   // turim tureti state kad issaugoti meniu
   useEffect(() => {
@@ -13,7 +21,8 @@ export default function useStrapi(urlEnd) {
       setError('');
       try {
         const { data } = await axios.get(
-          `${process.env.REACT_APP_STRAPI_URL}${urlEnd}`
+          `${process.env.REACT_APP_STRAPI_URL}${urlEnd}`,
+          headersObj
         );
         // console.log(data);
         setData(data);

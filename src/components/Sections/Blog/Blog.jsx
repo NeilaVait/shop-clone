@@ -6,14 +6,14 @@ import { useRouteMatch } from 'react-router';
 
 // forwardingRef - naudojama kai reikia perduoti DOM nuoroda SUkurtam komponetui
 const Blog = React.forwardRef((props, blogRef) => {
-  // const match = useRouteMatch();
-  // console.log('match', match);
+  // contexto pagalba gaunam token jei toks yra ir paduodam i useStrapi()
+  const token = null;
   function makeCorrectUrl() {
     const howManyItems = props.qty ? `?_limit=${props.qty}` : '';
     if (props.kind === 'paid') return `/canvas-paid-blogs${howManyItems}`;
     return `/canvas-blogs${howManyItems}`;
   }
-  const [blogs] = useStrapi(makeCorrectUrl());
+  const [blogs] = useStrapi(makeCorrectUrl(), token);
   // const firstTwo = blogs.slice(0, 2);
   return (
     <section ref={blogRef} className={`container ${css.blog}`}>
