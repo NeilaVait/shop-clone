@@ -15,16 +15,16 @@ function App() {
       <AuthProvider>
         {/* <button onClick={btnHandler}>Get ref</button> */}
         <Switch>
-          <Route path='/membersonlypage'>
+          <Route path="/members">
             <MembersOnlyPage />
           </Route>
-          <Route path='/blog'>
+          <Route path="/blog">
             <BlogPage />
           </Route>
-          <Route path='/login'>
+          <Route path="/login">
             <LoginPage />
           </Route>
-          <Route path='/'>
+          <Route path="/">
             <HomePage />
           </Route>
         </Switch>

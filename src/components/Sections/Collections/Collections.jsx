@@ -34,13 +34,13 @@ const collectionsDataWas = [
 // panauoti useStrapi ir gauti duomenis
 
 export default function Collections() {
-  const [collectionsData] = useStrapi('/canvas-special-offers');
+  const [collectionsData] = useStrapi('/canvas-offers');
   // console.log(
   //   process.env.REACT_APP_STRAPI_URL +
   //     collectionsData[0]?.image?.formats?.medium?.url
   // );
   return (
-    <section className='container'>
+    <section className="container">
       <div className={css['card-container']}>
         {collectionsData.map((it) => (
           <CollecionItem key={it.id} item={it} />

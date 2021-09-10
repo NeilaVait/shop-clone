@@ -11,7 +11,7 @@ export default function Hero() {
   return (
     <section className={css.hero}>
       <div className={css['center-part']}>
-        <h1>{isLoading ? '...' : heroData.mainTitle}</h1>
+        <h1>{isLoading ? '...' : heroData.title}</h1>
         <p>{heroData.subtitle}</p>
         <div className={css.controll}>
           <Button>{heroData.button1}</Button>
