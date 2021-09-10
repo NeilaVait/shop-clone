@@ -9,7 +9,9 @@ import LoginForm from '../../Login/LoginForm';
 // forwardingRef - naudojama kai reikia perduoti DOM nuoroda SUkurtam komponetui
 const Blog = React.forwardRef((props, blogRef) => {
   const authCtx = useContext(AuthContext);
+
   // contexto pagalba gaunam token jei toks yra ir paduodam i useStrapi()
+
   const token = (props.kind === 'paid' && authCtx.token) || null;
 
   function makeCorrectUrl() {
