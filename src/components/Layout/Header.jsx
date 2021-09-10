@@ -12,6 +12,11 @@ export default function Header({ page }) {
   // sekti ar dokumentas yra slenkamas zemyn
   const [navState, setNavState] = useState(false);
   const [menuItems] = useStrapi('/canvas-menus');
+
+  // jei nesam prisilogine tai isfiltruoti members only page kurio id 8
+  console.log('menuItems', menuItems);
+  const filteredMenuItems = menuItems.filter(() => {});
+  const finalMenuItems = userEmail ? menuItems : menuItems;
   // const match = useRouteMatch();
   // useEffect(() => {
   //   console.log('match', match);
@@ -50,7 +55,7 @@ export default function Header({ page }) {
         Canvas<strong>Store</strong>
       </Link>
       <nav className={css['main-nav']}>
-        {menuItems.map((l) => (
+        {finalMenuItems.map((l) => (
           <Link key={l.link} to={l.link}>
             {l.title}
           </Link>
