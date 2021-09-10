@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import useInput from '../../hooks/useInput';
 import { postData } from '../../utils/http';
+import { AuthContext } from '../../store/AuthProvider';
 
 const Card = styled.div`
   max-width: 400px;
@@ -55,6 +56,8 @@ const Hr = styled.div`
 `;
 
 export default function LoginForm() {
+  const authCtx = useContext(AuthContext);
+  console.log('authCtx', authCtx);
   const [email, setEmail] = useInput('paid@member.com');
   const [password, setPassword] = useInput('123456');
 
@@ -68,6 +71,7 @@ export default function LoginForm() {
     console.log(email, password);
     const response = await postData({ email, password }, '/auth/local');
     console.log(response);
+    // irasyti token i context
   }
   return (
     <Card>
