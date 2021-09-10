@@ -29,6 +29,7 @@ export default function Header({ page }) {
     }
   }
   // if (isLoading) return <header>Loading ...</header>;
+  // header dalyje kai prisiloginam mes parodom user email navigacijoj
   return (
     <header
       className={`${css.header} ${

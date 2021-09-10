@@ -8,11 +8,17 @@ import { useRouteMatch } from 'react-router';
 const Blog = React.forwardRef((props, blogRef) => {
   // const match = useRouteMatch();
   // console.log('match', match);
-  const howManyItems = props.qty ? `?_limit=${props.qty}` : '';
-  const [blogs] = useStrapi(`/canvas-blogs${howManyItems}`);
+  function makeCorrectUrl() {
+    const howManyItems = props.qty ? `?_limit=${props.qty}` : '';
+    if (props.kind === 'paid') return `/canvas-paid-blogs${howManyItems}`;
+    return `/canvas-blogs${howManyItems}`;
+  }
+  const [blogs] = useStrapi(makeCorrectUrl());
   // const firstTwo = blogs.slice(0, 2);
   return (
     <section ref={blogRef} className={`container ${css.blog}`}>
+      {props.kind === 'free' && <h1>Check out our blog</h1>}
+      {props.kind === 'paid' && <h1>Check out our Member only articles</h1>}
       {blogs.map((b) => (
         <BlogItem key={b.id} blog={b} />
       ))}

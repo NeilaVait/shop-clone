@@ -5,8 +5,11 @@ const AuthContext = React.createContext({
   login: (token) => {},
   logout: () => {},
 });
+AuthContext.displayName = 'AuthContext';
 
 export default function AuthProvider({ children }) {
+  // state, useEffect
+
   const ctx = {
     token: '',
     login: (token) => {},

@@ -11,8 +11,8 @@ export default function BlogPage() {
           <SingleBlogPage />
         </Route>
         <Route path='/blog'>
-          <Blog />
-          <Blog />
+          <Blog kind='free' />
+          <Blog kind='paid' />
         </Route>
       </Switch>
     </Layout>

@@ -8,6 +8,11 @@ export const postData = async (dataToSend, urlEnd) => {
         identifier: dataToSend.email,
         password: dataToSend.password,
       }
+      // {
+      //   headers: {
+      //     Authorization: 'Bearer token'
+      //   },
+      // }
     );
     return data;
   } catch (error) {
