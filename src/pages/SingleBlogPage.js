@@ -3,9 +3,9 @@ import BlogItem from '../components/Sections/Blog/BlogItem';
 import useStrapi from '../hooks/useStrapi';
 import useAuthCtx from './../hooks/useAuthCtx';
 
-export default function SingleBlogPage({ membersOnly }) {
+export default function SingleBlogPage({ membersOnly, kind }) {
   const authCtx = useAuthCtx();
-  const token = authCtx.token || null;
+  const token = (kind === 'paid' && authCtx.token) || null;
 
   const { blogId } = useParams();
   // console.log('params', blogId);
