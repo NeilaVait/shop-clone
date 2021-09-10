@@ -75,7 +75,11 @@ export default function LoginForm() {
     );
     console.log(postToStrapiAuthReslut);
     // irasyti token i context
-    authCtx.login(postToStrapiAuthReslut.jwt);
+    const userData = {
+      email: postToStrapiAuthReslut.user.email,
+      username: postToStrapiAuthReslut.user.username,
+    };
+    authCtx.login(postToStrapiAuthReslut.jwt, userData);
   }
   return (
     <Card>

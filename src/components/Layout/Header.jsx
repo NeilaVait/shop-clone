@@ -1,9 +1,14 @@
 import css from './Header.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import useStrapi from '../../hooks/useStrapi';
 import { Link, useRouteMatch } from 'react-router-dom';
+import { AuthContext } from '../../store/AuthProvider';
 
 export default function Header({ page }) {
+  const authCtx = useContext(AuthContext);
+  console.log('header auth context', authCtx);
+  const userEmail = authCtx.userInfo.email;
+  // gauti context ir paimti vartotjo email
   // sekti ar dokumentas yra slenkamas zemyn
   const [navState, setNavState] = useState(false);
   const [menuItems] = useStrapi('/canvas-menus');
@@ -47,7 +52,12 @@ export default function Header({ page }) {
         ))}
       </nav>
       <nav className={css['side-nav']}>
-        <Link to='/login'>SignUp/Login</Link>
+        {userEmail ? (
+          <Link to='/login'>Logout {userEmail}</Link>
+        ) : (
+          <Link to='/login'>SignUp/Login</Link>
+        )}
+
         <a href='/'>Cart</a>
       </nav>
     </header>
