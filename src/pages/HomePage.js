@@ -53,7 +53,7 @@ export default function HomePage() {
     console.log('aside', asideRef.current.getBoundingClientRect().top);
   }
   return (
-    <Layout>
+    <Layout page='home'>
       <Hero />
       <Collections />
       <Shop asideStick={asideStick} ref={asideRef} />

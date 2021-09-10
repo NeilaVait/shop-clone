@@ -33,7 +33,7 @@ export default function Header({ page }) {
   return (
     <header
       className={`${css.header} ${
-        navState || page === 'blog' ? css.active : ''
+        navState || page !== 'home' ? css.active : ''
       } `}
     >
       <Link className={css.logo} to='/'>
