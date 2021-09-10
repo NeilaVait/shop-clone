@@ -3,11 +3,15 @@ import css from './Blog.module.css';
 import BlogItem from './BlogItem';
 import useStrapi from '../../../hooks/useStrapi';
 import { useRouteMatch } from 'react-router';
+import { useContext } from 'react';
+import { AuthContext } from '../../../store/AuthProvider';
 
 // forwardingRef - naudojama kai reikia perduoti DOM nuoroda SUkurtam komponetui
 const Blog = React.forwardRef((props, blogRef) => {
+  const authCtx = useContext(AuthContext);
   // contexto pagalba gaunam token jei toks yra ir paduodam i useStrapi()
-  const token = null;
+  const token = (props.kind === 'paid' && authCtx.token) || null;
+
   function makeCorrectUrl() {
     const howManyItems = props.qty ? `?_limit=${props.qty}` : '';
     if (props.kind === 'paid') return `/canvas-paid-blogs${howManyItems}`;

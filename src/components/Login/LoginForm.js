@@ -59,7 +59,7 @@ const Hr = styled.div`
 export default function LoginForm() {
   const history = useHistory();
   const authCtx = useContext(AuthContext);
-  console.log('authCtx', authCtx);
+  // console.log('authCtx', authCtx);
   const [email, setEmail] = useInput('paid@member.com');
   const [password, setPassword] = useInput('123456');
 
@@ -70,12 +70,12 @@ export default function LoginForm() {
     if (!email || !password) {
       return setFormError('Fill in fields');
     }
-    console.log(email, password);
+    // console.log(email, password);
     const postToStrapiAuthReslut = await postData(
       { email, password },
       '/auth/local'
     );
-    console.log(postToStrapiAuthReslut);
+    // console.log(postToStrapiAuthReslut);
     // irasyti token i context
     const userData = {
       email: postToStrapiAuthReslut.user.email,

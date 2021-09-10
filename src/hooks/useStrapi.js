@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 
 export default function useStrapi(urlEnd, token = null) {
@@ -6,13 +6,15 @@ export default function useStrapi(urlEnd, token = null) {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const headersObj = token
-    ? {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    : null;
+  const headersObj = useMemo(() => {
+    return token
+      ? {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      : null;
+  }, [token]);
 
   // turim tureti state kad issaugoti meniu
   useEffect(() => {
@@ -33,7 +35,7 @@ export default function useStrapi(urlEnd, token = null) {
         setIsLoading(false);
       }
     })();
-  }, [urlEnd]);
+  }, [urlEnd, headersObj]);
 
   return [data, isLoading, error];
 }

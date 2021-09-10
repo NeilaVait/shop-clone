@@ -6,7 +6,7 @@ import { AuthContext } from '../../store/AuthProvider';
 
 export default function Header({ page }) {
   const authCtx = useContext(AuthContext);
-  console.log('header auth context', authCtx);
+  // console.log('header auth context', authCtx);
   const userEmail = authCtx.userInfo.email;
   // gauti context ir paimti vartotjo email
   // sekti ar dokumentas yra slenkamas zemyn
