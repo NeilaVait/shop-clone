@@ -64,11 +64,12 @@ export default function RegisterForm() {
   const history = useHistory();
   const authCtx = useContext(AuthContext);
   // console.log('authCtx', authCtx);
-  const [email, setEmail] = useInput('james@auth.com');
-  const [password, setPassword] = useInput('123456');
-  const [passwordRepeat, setPasswordRepeat] = useInput('12345');
+  const [email, setEmail] = useInput('');
+  const [password, setPassword] = useInput('');
+  const [passwordRepeat, setPasswordRepeat] = useInput('');
 
   const [formIsValid, setFormIsValid] = useState(null);
+  const [formIsTouched, setFormIsTouched] = useState(false);
 
   const isFormFilled = email.trim() !== '' && password.trim() !== '';
   const emailIsValid = verifyEmail(email);
@@ -78,8 +79,8 @@ export default function RegisterForm() {
     if (passMatch && emailIsValid && isFormFilled) {
       return setFormIsValid(true);
     }
-    setFormIsValid(false);
-  }, [passMatch, emailIsValid, isFormFilled]);
+    setFormIsValid(formIsTouched ? false : null);
+  }, [passMatch, emailIsValid, isFormFilled, formIsTouched]);
 
   // const [formError, setFormError] = useState({
   //   email: false,
@@ -120,27 +121,28 @@ export default function RegisterForm() {
     <Card>
       <h2>Hello, welcome</h2>
       <Hr />
-      {!isFormFilled && <p>Please fill all fields</p>}
-      {!emailIsValid && <p>Please check your email</p>}
-      {!passMatch && <p>Passwords must match</p>}
+      {!isFormFilled && formIsTouched && <p>Please fill all fields</p>}
+      {!emailIsValid && formIsTouched && <p>Please check your email</p>}
+      {!passMatch && formIsTouched && <p>Passwords must match</p>}
 
       <form onSubmit={handleSubmit}>
         <input
-          className={!emailIsValid ? 'invalid' : ''}
+          onBlur={() => setFormIsTouched(true)}
+          className={!emailIsValid && formIsTouched ? 'invalid' : ''}
           value={email}
           onChange={setEmail}
           type="text"
           placeholder="Username or email"
         />
         <input
-          className={!isFormFilled ? 'invalid' : ''}
+          className={!isFormFilled && formIsTouched ? 'invalid' : ''}
           value={password}
           onChange={setPassword}
           type="password"
           placeholder="Password"
         />
         <input
-          className={!passMatch ? 'invalid' : ''}
+          className={!passMatch && formIsTouched ? 'invalid' : ''}
           value={passwordRepeat}
           onChange={setPasswordRepeat}
           type="password"
