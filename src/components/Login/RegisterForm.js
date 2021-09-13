@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import useInput from '../../hooks/useInput';
 import { postData } from '../../utils/http';
 import { AuthContext } from '../../store/AuthProvider';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Card = styled.div`
   max-width: 400px;
@@ -38,7 +38,7 @@ const Card = styled.div`
     background-color: #545454;
     cursor: not-allowed;
   }
-  form a {
+  a {
     display: block;
     text-align: right;
     margin-bottom: 1rem;
@@ -55,12 +55,13 @@ const Hr = styled.div`
   background-color: gray;
 `;
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const history = useHistory();
   const authCtx = useContext(AuthContext);
   // console.log('authCtx', authCtx);
-  const [email, setEmail] = useInput('paid@member.com');
+  const [email, setEmail] = useInput('james@auth.com');
   const [password, setPassword] = useInput('123456');
+  const [passwordRepeat, setPasswordRepeat] = useInput('12345');
 
   const [formError, setFormError] = useState('');
 
@@ -92,19 +93,17 @@ export default function LoginForm() {
 
   return (
     <Card>
-      <h2>Hello, welcome back</h2>
+      <h2>Hello, welcome</h2>
       <Hr />
       <form onSubmit={handleSubmit}>
         <input value={email} onChange={setEmail} type="text" placeholder="Username or email" />
         <input value={password} onChange={setPassword} type="password" placeholder="Password" />
-        <a href="/">Forgot Password</a>
+        <input value={passwordRepeat} onChange={setPasswordRepeat} type="password" placeholder="Repeat password" />
 
-        <button type="submit">Login</button>
+        <button type="submit">Sign up</button>
       </form>
       <Hr />
-      <h6>
-        Don't have an account? <Link to="/register">Sign up</Link>
-      </h6>
+      <h6>Have an account? Log in</h6>
     </Card>
   );
 }
