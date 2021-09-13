@@ -1,9 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useInput from '../../hooks/useInput';
-import { postData } from '../../utils/http';
 import { AuthContext } from '../../store/AuthProvider';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+import { doPasswordsMatch, verifyEmail } from '../../utils/validate';
+import { sendSignUpData } from '../../utils/http';
 
 const Card = styled.div`
   max-width: 400px;
@@ -22,6 +23,10 @@ const Card = styled.div`
     width: 100%;
     margin-bottom: 10px;
   }
+  input.invalid {
+    border-color: tomato;
+    background-color: rgb(255, 200, 190);
+  }
   h2 {
     margin: 1rem auto;
   }
@@ -38,7 +43,7 @@ const Card = styled.div`
     background-color: #545454;
     cursor: not-allowed;
   }
-  a {
+  form a {
     display: block;
     text-align: right;
     margin-bottom: 1rem;
@@ -63,15 +68,64 @@ export default function RegisterForm() {
   const [password, setPassword] = useInput('123456');
   const [passwordRepeat, setPasswordRepeat] = useInput('12345');
 
-  const [formError, setFormError] = useState('');
+  const [formError, setFormError] = useState({
+    email: false,
+    passwordMatch: false,
+    form: false,
+  });
 
   async function handleSubmit(e) {
     e.preventDefault();
+    // reset errors
+    setFormError((state) => {
+      return {
+        email: false,
+        passwordMatch: false,
+        form: false,
+      };
+    });
     if (!email || !password) {
-      return setFormError('Fill in fields');
+      return setFormError({
+        ...formError,
+        form: 'email and pass cant be blank',
+      });
     }
-    // console.log(email, password);
-    const postToStrapiAuthReslut = await postData({ email, password }, '/auth/local');
+    console.log(email, password, passwordRepeat);
+
+    // patikrinti ar slaptazodiziai sutampa, jei ne ismesti klaida
+    // parodyti klaida formoj
+    // isvalyti klaidas kai slaptazodziai sutampa
+    // patikrinti kad email validuma su regex arba tiesiog patikrinti kad jis turetu @ ir taska po @
+    const passMatch = doPasswordsMatch(password, passwordRepeat);
+    const validEmail = verifyEmail(email);
+    // console.log('validEmail', validEmail);
+
+    if (!validEmail) {
+      console.log('invalid email');
+      setFormError((errorState) => ({
+        ...errorState,
+        email: 'Please check email format',
+      }));
+    }
+
+    // pass match validation
+    if (!passMatch) {
+      console.log('not match');
+      setFormError((errorState) => ({
+        ...errorState,
+        passwordMatch: 'pass must match',
+      }));
+    }
+
+    if (formError.email) {
+      console.log('valid email');
+      return;
+    }
+
+    console.log('invalid email');
+    return;
+
+    const postToStrapiAuthReslut = await sendSignUpData({ email, password }, '/auth/local/register');
     // console.log(postToStrapiAuthReslut);
     // irasyti token i context
     const userData = {
@@ -80,11 +134,11 @@ export default function RegisterForm() {
     };
     authCtx.login(postToStrapiAuthReslut.jwt, userData);
     // redirect
-    await history.replace('/blog');
+    history.replace('/blog');
   }
 
   useEffect(() => {
-    // componentWillUnmount
+    // componentWillUmount
     return () => {
       console.log('clean up');
       setFormError(null);
@@ -93,17 +147,39 @@ export default function RegisterForm() {
 
   return (
     <Card>
-      <h2>Hello, welcome</h2>
+      <h2>Hello, welcome back</h2>
       <Hr />
+      {formError.passwordMatch && <p>{formError.passwordMatch}</p>}
+      {formError.email && <p>{formError.email}</p>}
       <form onSubmit={handleSubmit}>
-        <input value={email} onChange={setEmail} type="text" placeholder="Username or email" />
-        <input value={password} onChange={setPassword} type="password" placeholder="Password" />
-        <input value={passwordRepeat} onChange={setPasswordRepeat} type="password" placeholder="Repeat password" />
+        <input
+          className={formError.email ? 'invalid' : ''}
+          value={email}
+          onChange={setEmail}
+          type="text"
+          placeholder="Username or email"
+        />
+        <input
+          className={formError.passwordMatch ? 'invalid' : ''}
+          value={password}
+          onChange={setPassword}
+          type="password"
+          placeholder="Password"
+        />
+        <input
+          className={formError.passwordMatch ? 'invalid' : ''}
+          value={passwordRepeat}
+          onChange={setPasswordRepeat}
+          type="password"
+          placeholder="repeat Password"
+        />
 
-        <button type="submit">Sign up</button>
+        <button type="submit">Register</button>
       </form>
       <Hr />
-      <h6>Have an account? Log in</h6>
+      <h6>
+        Have an account? <Link to="login">Login</Link>
+      </h6>
     </Card>
   );
 }
