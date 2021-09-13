@@ -4,7 +4,7 @@ import useInput from '../../hooks/useInput';
 import { AuthContext } from '../../store/AuthProvider';
 import { useHistory, Link } from 'react-router-dom';
 import { doPasswordsMatch, verifyEmail } from '../../utils/validate';
-import { sendSignUpData } from '../../utils/http';
+import { postData } from './../../utils/http';
 
 const Card = styled.div`
   max-width: 400px;
@@ -76,14 +76,16 @@ export default function RegisterForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // reset errors
-    setFormError((state) => {
-      return {
-        email: false,
-        passwordMatch: false,
-        form: false,
-      };
-    });
+    // // reset errors
+
+    // setFormError((state) => {
+    //   return {
+    //     email: false,
+    //     passwordMatch: false,
+    //     form: false,
+    //   };
+    // });
+
     if (!email || !password) {
       return setFormError({
         ...formError,
@@ -96,37 +98,38 @@ export default function RegisterForm() {
     // parodyti klaida formoj
     // isvalyti klaidas kai slaptazodziai sutampa
     // patikrinti kad email validuma su regex arba tiesiog patikrinti kad jis turetu @ ir taska po @
-    const passMatch = doPasswordsMatch(password, passwordRepeat);
-    const validEmail = verifyEmail(email);
-    // console.log('validEmail', validEmail);
+    // const passMatch = doPasswordsMatch(password, passwordRepeat);
+    // const validEmail = verifyEmail(email);
+    // // console.log('validEmail', validEmail);
 
-    if (!validEmail) {
-      console.log('invalid email');
-      setFormError((errorState) => ({
-        ...errorState,
-        email: 'Please check email format',
-      }));
-    }
+    // if (!validEmail) {
+    //   console.log('invalid email');
+    //   setFormError((errorState) => ({
+    //     ...errorState,
+    //     email: 'Please check email format',
+    //   }));
+    // }
 
-    // pass match validation
-    if (!passMatch) {
-      console.log('not match');
-      setFormError((errorState) => ({
-        ...errorState,
-        passwordMatch: 'pass must match',
-      }));
-    }
+    // // pass match validation
+    // if (!passMatch) {
+    //   console.log('not match');
+    //   setFormError((errorState) => ({
+    //     ...errorState,
+    //     passwordMatch: 'pass must match',
+    //   }));
+    // }
 
-    if (formError.email) {
-      console.log('valid email');
-      return;
-    }
+    // if (formError.email) {
+    //   console.log('valid email');
+    //   return;
+    // }
 
-    console.log('invalid email');
-    return;
+    // console.log('invalid email');
+    // return;
 
-    const postToStrapiAuthReslut = await sendSignUpData({ email, password }, '/auth/local/register');
-    // console.log(postToStrapiAuthReslut);
+    const postToStrapiAuthReslut = await postData({ email, password }, '/auth/local/register', true);
+    console.log('postToStrapiAuthReslut', postToStrapiAuthReslut);
+
     // irasyti token i context
     const userData = {
       email: postToStrapiAuthReslut.user.email,
@@ -134,7 +137,7 @@ export default function RegisterForm() {
     };
     authCtx.login(postToStrapiAuthReslut.jwt, userData);
     // redirect
-    history.replace('/blog');
+    history.replace('/');
   }
 
   useEffect(() => {
