@@ -99,6 +99,8 @@ export default function RegisterForm() {
     const postToStrapiAuthReslut = await postData({ email, password }, '/auth/local/register', true);
     console.log('postToStrapiAuthReslut', postToStrapiAuthReslut);
 
+    // patikrint ar pavyko loginas
+
     // irasyti token i context
     const userData = {
       email: postToStrapiAuthReslut.user.email,
