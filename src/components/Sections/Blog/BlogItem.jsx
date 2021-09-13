@@ -2,12 +2,17 @@ import css from './BlogItem.module.css';
 import Icon from '../../UI/Icon';
 import { Link, useRouteMatch } from 'react-router-dom';
 
-export default function BlogItem({ blog: b, singlePage }) {
+export default function BlogItem({ blog: b, singlePage, kind, membersOnlyBackFlag }) {
   const match = useRouteMatch();
-  console.log(match);
+  console.log('match', match);
   // match.url === /members/1
-  const indexOfSecondSlash = match.url.lastIndexOf();
-  const backPath = match.url.slice(0, indexOfSecondSlash);
+  const indexOfSecondSlash = match.url.lastIndexOf('/');
+
+  let backPath = match.url.slice(0, indexOfSecondSlash);
+  if (!membersOnlyBackFlag) backPath = '/blog';
+  console.log('backpath', backPath);
+
+  const oneArticleUrl = kind === 'paid' ? `/members/${b.id}` : `${match.path}/${b.id}`;
 
   return (
     <article className={`${css['blog-item']} ${singlePage ? css.singlePage : ''}`}>
@@ -29,7 +34,7 @@ export default function BlogItem({ blog: b, singlePage }) {
       )}
       {/* match.url - grazina dabartini url adresa */}
       {!singlePage && (
-        <Link to={`${match.url}/${b.id}`}>
+        <Link to={oneArticleUrl}>
           View details <Icon icon="long-arrow-right" />
         </Link>
       )}

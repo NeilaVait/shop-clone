@@ -28,7 +28,7 @@ const Blog = React.forwardRef((props, blogRef) => {
       {props.kind === 'free' && <h1>Check out our blog</h1>}
       {props.kind === 'paid' && <h1>Check out our Member only articles</h1>}
       {blogs.map((b) => (
-        <BlogItem key={b.id} blog={b} />
+        <BlogItem kind={props.kind} membersOnlyBackFlag={props.membersOnlyBackFlag} key={b.id} blog={b} />
       ))}
     </section>
   );
